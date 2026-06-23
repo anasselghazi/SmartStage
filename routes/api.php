@@ -26,11 +26,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // -----------------------------------------------
     Route::middleware('is_admin')->group(function () {
 
-        // Gestion des comptes RH (US 3.3)
-        Route::get('/admin/comptes',              [AdminController::class, 'listerComptes']);
-        Route::patch('/admin/comptes/{user}/approuver', [AdminController::class, 'approuver']);
-        Route::patch('/admin/comptes/{user}/bloquer',   [AdminController::class, 'bloquer']);
-        Route::patch('/admin/comptes/{user}/debloquer', [AdminController::class, 'debloquer']);
+        // Gestion des comptes RH (US 3.3) — UUID dans l'URL
+        Route::get('/admin/comptes',                        [AdminController::class, 'listerComptes']);
+        Route::patch('/admin/comptes/{user}/approuver',     [AdminController::class, 'approuver']);
+        Route::patch('/admin/comptes/{user}/bloquer',       [AdminController::class, 'bloquer']);
+        Route::patch('/admin/comptes/{user}/debloquer',     [AdminController::class, 'debloquer']);
 
         // Import Excel (US 4.1)
         Route::post('/admin/import', [ImportController::class, 'importer']);
@@ -42,10 +42,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('is_approuve')->group(function () {
 
         // Recherche stagiaire (US 5.1)
-        Route::get('/stagiaires/rechercher', [StagiaireController::class, 'rechercher']);
+        Route::get('/stagiaires/rechercher',                [StagiaireController::class, 'rechercher']);
 
         // Generation attestation (US 5.1 / 5.2)
-        Route::post('/attestations/generer',              [AttestationController::class, 'generer']);
-        Route::get('/attestations/{stagiaire}/historique', [AttestationController::class, 'historique']);
+        Route::post('/attestations/generer',                [AttestationController::class, 'generer']);
+        Route::get('/attestations/{stagiaire}/historique',  [AttestationController::class, 'historique']);
     });
 });

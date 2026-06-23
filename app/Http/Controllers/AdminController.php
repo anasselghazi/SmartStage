@@ -15,7 +15,7 @@ class AdminController extends Controller
     {
         $comptes = User::where('role', 'rh')
             ->orderBy('created_at', 'desc')
-            ->get(['id', 'nom', 'email', 'statut', 'created_at']);
+            ->get(['id', 'nom', 'email', 'role','statut', 'created_at']);
 
         return response()->json($comptes);
     }
