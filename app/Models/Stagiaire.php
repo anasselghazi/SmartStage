@@ -12,10 +12,22 @@ class Stagiaire extends Model
     protected $fillable = [
         'cin',
         'reference',
+        'civilite',
         'nom_complet',
         'date_debut',
         'date_fin',
         'service',
+        'entite',
+        'localisation',
+        'parrain',
+        'niveau_etude',
+        'email',
+        'cycle_formation',
+        'specialite',
+        'ville_ecole',
+        'ecole',
+        'type_ecole',
+        'remunere',
     ];
 
     protected $casts = [
@@ -37,8 +49,7 @@ class Stagiaire extends Model
 
     public static function champsValides(array $ligne): bool
     {
-        return !empty($ligne['cin'])
-            && !empty($ligne['reference'])
+        return !empty($ligne['reference'])
             && !empty($ligne['nom_complet'])
             && !empty($ligne['date_debut'])
             && !empty($ligne['date_fin']);

@@ -35,30 +35,35 @@ class AuthController extends Controller
      * Connexion et generation du token Sanctum
      */
     public function login(LoginRequest $request)  
-    {
-        $user = User::where('email', $request->email)->first();
+{
+    $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['Les identifiants sont incorrects.'],
-            ]);
-        }
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
+    if (!$user) {
         return response()->json([
-            'message' => 'Connexion réussie.',
-            'token'   => $token,
-            'user'    => [
-                'id'     => $user->id,
-                'nom'    => $user->nom,
-                'email'  => $user->email,
-                'role'   => $user->role,
-                'statut' => $user->statut,
-            ],
-        ]);
+            'message' => 'L\'adresse email n\'existe pas.'
+        ], 404); 
     }
 
+    if (!Hash::check($request->password, $user->password)) {
+        return response()->json([
+            'message' => 'Le mot de passe est incorrect.'
+        ], 401); 
+    }
+
+    $token = $user->createToken('auth_token')->plainTextToken;
+
+    return response()->json([
+        'message' => 'Connexion réussie.',
+        'token'   => $token,
+        'user'    => [
+            'id'     => $user->id,
+            'nom'    => $user->nom,
+            'email'  => $user->email,
+            'role'   => $user->role,
+            'statut' => $user->statut,
+        ],
+    ], 200);
+}
     /**
      * Deconnexion et suppression du token
      */
