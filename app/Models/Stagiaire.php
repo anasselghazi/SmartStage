@@ -49,7 +49,8 @@ class Stagiaire extends Model
 
     public static function champsValides(array $ligne): bool
     {
-        return !empty($ligne['reference'])
+        return !empty($ligne['cin']) 
+             && !empty($ligne['reference'])
             && !empty($ligne['nom_complet'])
             && !empty($ligne['date_debut'])
             && !empty($ligne['date_fin']);

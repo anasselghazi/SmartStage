@@ -63,7 +63,7 @@ class StagiaireSheetImport implements ToCollection, WithStartRow
             $dateFin   = $this->convertirDate($row[8] ?? null);
 
             $ligne = [
-                'cin'             => $cin ?: null,
+                'cin'             => $cin ,
                 'reference'       => $reference,
                 'civilite'        => trim($row[4]  ?? '') ?: null,
                 'nom_complet'     => $nomComplet,
