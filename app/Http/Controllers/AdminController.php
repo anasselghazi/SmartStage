@@ -7,25 +7,19 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    /**
-     * Liste de tous les comptes RH (en attente + approuvés + bloqués)
-     * US 3.3
-     */
     public function listerComptes()
     {
         $comptes = User::where('role', 'rh')
             ->orderBy('created_at', 'desc')
-            ->get(['id', 'nom', 'email', 'role','statut', 'created_at']);
+            ->get(['uuid', 'nom', 'email', 'role', 'statut', 'created_at']);
 
         return response()->json($comptes);
     }
 
-    /**
-     * Approuver un compte RH
-     * US 3.3
-     */
-    public function approuver(User $user)
+    public function approuver(string $uuid)
     {
+        $user = User::where('uuid', $uuid)->firstOrFail();
+
         if ($user->estAdmin()) {
             return response()->json([
                 'message' => 'Action non autorisée sur un compte administrateur.'
@@ -40,12 +34,10 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * Bloquer un compte RH (même déjà approuvé)
-     * US 3.3
-     */
-    public function bloquer(User $user)
+    public function bloquer(string $uuid)
     {
+        $user = User::where('uuid', $uuid)->firstOrFail();
+
         if ($user->estAdmin()) {
             return response()->json([
                 'message' => 'Action non autorisée sur un compte administrateur.'
@@ -60,12 +52,10 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * Débloquer un compte RH
-     * US 3.3
-     */
-    public function debloquer(User $user)
+    public function debloquer(string $uuid)
     {
+        $user = User::where('uuid', $uuid)->firstOrFail();
+
         if ($user->estAdmin()) {
             return response()->json([
                 'message' => 'Action non autorisée sur un compte administrateur.'

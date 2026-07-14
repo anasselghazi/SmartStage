@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard'
 import Recherche from './pages/Recherche'
 import Attestation from './pages/Attestation'
 import AdminComptes from './pages/AdminComptes'
+import ImportExcel from './pages/ImportExcel'
 import './index.css'
 
 createRoot(document.getElementById('root')).render(
@@ -44,11 +45,16 @@ createRoot(document.getElementById('root')).render(
           {/* Routes protégées Admin */}
           <Route path="/admin/comptes" element={
             <PrivateRoute adminOnly={true}><AdminComptes /></PrivateRoute>
+            
+          } />
+          <Route path="/admin/import" element={
+             <PrivateRoute adminOnly={true}><ImportExcel /></PrivateRoute>
           } />
 
           {/* Redirect par défaut */}
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
+          
         </Routes>
       </AuthProvider>
     </BrowserRouter>
