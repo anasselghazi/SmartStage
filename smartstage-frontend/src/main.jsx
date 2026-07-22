@@ -10,6 +10,7 @@ import Recherche from './pages/Recherche'
 import Attestation from './pages/Attestation'
 import AdminComptes from './pages/AdminComptes'
 import ImportExcel from './pages/ImportExcel'
+import Historique from './pages/HistoriquePage'
 import './index.css'
 
 createRoot(document.getElementById('root')).render(
@@ -40,6 +41,9 @@ createRoot(document.getElementById('root')).render(
           } />
           <Route path="/attestation" element={
             <PrivateRoute><Attestation /></PrivateRoute>
+          } />
+          <Route path="/historique" element={
+            <PrivateRoute><Historique /></PrivateRoute>
           } />
 
           {/* Routes protégées Admin */}
