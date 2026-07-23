@@ -8,7 +8,7 @@ const api = axios.create({
   },
 });
 
-// Intercepteur : ajoute le token automatiquement à chaque requête
+// Intercepteur Requête : ajoute le token Bearer
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -17,15 +17,21 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Intercepteur : redirige vers login si token expiré (401)
+// Intercepteur Réponse : gestion propre des erreurs de session
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const isLoginPage = window.location.pathname === '/login';
+
+    // Si le token est expiré/invalide (401) ET qu'on n'est pas déjà sur la page de login
+    if (error.response?.status === 401 && !isLoginPage) {
+      console.error('Session expirée ou requête non autorisée sur :', error.config?.url);
+      
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       window.location.href = '/login';
     }
+
     return Promise.reject(error);
   }
 );

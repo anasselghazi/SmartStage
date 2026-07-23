@@ -31,26 +31,21 @@ class Attestation extends Model
         return $this->belongsTo(User::class, 'genere_par_id');
     }
 
-    
     public static function genererNumero(): string
     {
-        $annee = now()->year;
-        
-        $dernier = self::whereYear('created_at', $annee)
-            ->lockForUpdate()
-            ->count() + 1;
-            
+        $annee   = now()->year;
+        $dernier = self::whereYear('created_at', $annee)->count() + 1;
         return sprintf('ATT-%d-%06d', $annee, $dernier);
     }
 
-    
     public static function creer(int $stagiaireId, int $genereParId): self
     {
         return DB::transaction(function () use ($stagiaireId, $genereParId) {
+            $numero = self::genererNumero();
             return self::create([
                 'stagiaire_id'    => $stagiaireId,
                 'genere_par_id'   => $genereParId,
-                'numero'          => self::genererNumero(), // هنا غايتطبق الـ Lock للي درنا لفوق
+                'numero'          => $numero,
                 'date_generation' => now(),
             ]);
         });

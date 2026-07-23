@@ -41,8 +41,8 @@ const Attestation = () => {
           {/* En-tête */}
           <div className="header">
             <div className="header-left">
-              <p className="company-name">SmartStage</p>
-              <p className="company-subtitle">Système de gestion des stages</p>
+              <p className="company-name">OGAS</p>
+              <p className="company-subtitle">OCP Gestion Attestations Stage</p>
             </div>
             <div className="header-right">
               <p>Réf : {stagiaire.reference}</p>

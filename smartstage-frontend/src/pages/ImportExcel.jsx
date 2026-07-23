@@ -70,7 +70,7 @@ const ImportExcel = () => {
 
       {/* Navbar */}
       <nav className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-blue-600">SmartStage</h1>
+        <h1 className="text-xl font-bold text-blue-600">OGAS</h1>
         <button
           onClick={() => navigate('/dashboard')}
           className="text-sm text-gray-500 hover:text-blue-600"

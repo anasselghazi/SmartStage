@@ -19,7 +19,7 @@ class AttestationController extends Controller
         // 2. Récupération (On est sûr qu'il existe grâce au validator)
         $stagiaire = Stagiaire::find($request->stagiaire_id);
         // US 5.2 : Vérification des champs requis pour l'attestation
-        $champsRequis = ['cin', 'reference', 'nom_complet', 'date_debut', 'date_fin'];
+        $champsRequis = ['reference', 'nom_complet', 'date_debut', 'date_fin'];
         $manquants = [];
         foreach ($champsRequis as $champ) {
             if (empty($stagiaire->$champ)) {
@@ -68,4 +68,14 @@ class AttestationController extends Controller
             'attestations' => $attestations,
         ]);
     }
+    public function toutesLesAttestations()
+{
+    $attestations = Attestation::with(['stagiaire', 'generePar:id,nom,email'])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return response()->json([
+        'attestations' => $attestations,
+    ]);
+}
 }

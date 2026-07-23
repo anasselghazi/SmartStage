@@ -9,12 +9,14 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser && token) {
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
-  }, []);
+  const storedUser  = localStorage.getItem('user');
+  const storedToken = localStorage.getItem('token');
+  if (storedUser && storedToken) {
+    setUser(JSON.parse(storedUser));
+    setToken(storedToken);
+  }
+  setLoading(false);
+}, []);
 
   const login = async (email, password) => {
     const response = await api.post('/login', { email, password });

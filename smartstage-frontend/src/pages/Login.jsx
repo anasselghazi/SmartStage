@@ -41,7 +41,7 @@ const Login = () => {
 
         {/* Logo / Titre */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-blue-600">SmartStage</h1>
+          <h1 className="text-3xl font-bold text-blue-600">OGAS</h1>
           <p className="text-gray-500 mt-1">Gestion des attestations de stage</p>
         </div>
 

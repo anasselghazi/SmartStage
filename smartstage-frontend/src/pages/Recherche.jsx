@@ -31,16 +31,24 @@ const Recherche = () => {
     }
   };
 
-  const handleImprimer = () => {
-    navigate('/attestation', { state: { stagiaire } });
-  };
+  const handleImprimer = async () => {
+    try {
+        await api.post('/attestations/generer', {
+            stagiaire_id: stagiaire.id,
+        });
+    } catch (err) {
+        console.error('Erreur génération:', err);
+    } finally {
+        navigate('/attestation', { state: { stagiaire } });
+    }
+};
 
   return (
     <div className="min-h-screen bg-gray-50">
 
       {/* Navbar */}
       <nav className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-blue-600">SmartStage</h1>
+        <h1 className="text-xl font-bold text-blue-600">OGAS</h1>
         <button
           onClick={() => navigate('/dashboard')}
           className="text-sm text-gray-500 hover:text-blue-600"

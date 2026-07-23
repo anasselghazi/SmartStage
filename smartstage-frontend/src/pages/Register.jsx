@@ -45,7 +45,7 @@ const Register = () => {
 
         {/* Titre */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-blue-600">SmartStage</h1>
+          <h1 className="text-3xl font-bold text-blue-600">OGAS</h1>
           <p className="text-gray-500 mt-1">Créer un compte Gestionnaire RH</p>
         </div>
 

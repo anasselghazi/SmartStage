@@ -1,29 +1,28 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const PrivateRoute = ({ children, adminOnly = false }) => {
+  const location = useLocation();
   const { user, loading, isAdmin, isApprouve } = useAuth();
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    );
-  }
+  console.log("PATH:", location.pathname);
+  console.log("USER:", user);
+  console.log("LOADING:", loading);
 
-  // Non connecté
+  if (loading) return <div>Loading...</div>;
+
   if (!user) {
+    console.log("Redirect because user is null");
     return <Navigate to="/login" replace />;
   }
 
-  // Route admin uniquement
   if (adminOnly && !isAdmin()) {
+    console.log("Redirect because not admin");
     return <Navigate to="/dashboard" replace />;
   }
 
-  // Compte RH non approuvé
   if (!isAdmin() && !isApprouve()) {
+    console.log("Redirect because not approved");
     return <Navigate to="/attente" replace />;
   }
 

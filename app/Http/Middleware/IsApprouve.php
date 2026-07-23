@@ -13,23 +13,14 @@ class IsApprouve
         $user = $request->user();
 
         if (!$user) {
-            return response()->json([
-                'message' => 'Non authentifié.'
-            ], 401);
+            return response()->json(['message' => 'Unauthenticated.'], 401);
         }
 
-        if ($user->estBloque()) {
-            return response()->json([
-                'message' => 'Votre compte a été bloqué. Contactez l\'administrateur.'
-            ], 403);
+        // L-Admin dima m3diz w l-user khass 'approuve' (bila accent ou majuscule)
+        if ($user->role === 'admin' || strtolower($user->statut) === 'approuve') {
+            return $next($request);
         }
 
-        if ($user->estEnAttente()) {
-            return response()->json([
-                'message' => 'Votre compte est en attente de validation par l\'administrateur.'
-            ], 403);
-        }
-
-        return $next($request);
+        return response()->json(['message' => 'Compte non approuvé.'], 403);
     }
 }
