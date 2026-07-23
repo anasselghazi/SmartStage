@@ -1,4 +1,4 @@
-ï»¿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 
@@ -54,7 +54,7 @@ const Historique = () => {
           onClick={() => navigate('/dashboard')}
           className="text-sm text-gray-500 hover:text-blue-600"
         >
-          â† Retour
+          ? Retour
         </button>
       </nav>
 
@@ -65,7 +65,7 @@ const Historique = () => {
             {filtrees.length} attestation(s)
           </span>
         </div>
-        <p className="text-gray-500 text-sm mb-6">Toutes les attestations gÃ©nÃ©rÃ©es</p>
+        <p className="text-gray-500 text-sm mb-6">Toutes les attestations générées</p>
 
         {/* Barre de recherche */}
         <div className="mb-6">
@@ -73,7 +73,7 @@ const Historique = () => {
             type="text"
             value={recherche}
             onChange={handleSearch}
-            placeholder="Rechercher par numÃ©ro, nom, CIN ou rÃ©fÃ©rence..."
+            placeholder="Rechercher par numéro, nom, CIN ou référence..."
             className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -92,8 +92,8 @@ const Historique = () => {
           </div>
         ) : filtrees.length === 0 ? (
           <div className="bg-white rounded-xl shadow-sm p-8 text-center text-gray-400">
-            <p className="text-4xl mb-3">ğŸ“„</p>
-            <p>{recherche ? 'Aucun rÃ©sultat pour cette recherche.' : 'Aucune attestation gÃ©nÃ©rÃ©e pour le moment.'}</p>
+            <p className="text-4xl mb-3">??</p>
+            <p>{recherche ? 'Aucun résultat pour cette recherche.' : 'Aucune attestation générée pour le moment.'}</p>
           </div>
         ) : (
           <>
@@ -101,10 +101,10 @@ const Historique = () => {
               <table className="w-full text-sm">
                 <thead className="bg-gray-50 border-b">
                   <tr>
-                    <th className="text-left px-6 py-3 font-medium text-gray-600">NumÃ©ro</th>
+                    <th className="text-left px-6 py-3 font-medium text-gray-600">Numéro</th>
                     <th className="text-left px-6 py-3 font-medium text-gray-600">Stagiaire</th>
-                    <th className="text-left px-6 py-3 font-medium text-gray-600">RÃ©fÃ©rence</th>
-                    <th className="text-left px-6 py-3 font-medium text-gray-600">GÃ©nÃ©rÃ© par</th>
+                    <th className="text-left px-6 py-3 font-medium text-gray-600">Référence</th>
+                    <th className="text-left px-6 py-3 font-medium text-gray-600">Généré par</th>
                     <th className="text-left px-6 py-3 font-medium text-gray-600">Date</th>
                     <th className="text-left px-6 py-3 font-medium text-gray-600">Action</th>
                   </tr>
@@ -130,7 +130,7 @@ const Historique = () => {
                           })}
                           className="bg-green-100 hover:bg-green-200 text-green-700 text-xs font-medium px-3 py-1.5 rounded-lg transition"
                         >
-                          ğŸ–¨ï¸ RÃ©imprimer
+                          ??? Réimprimer
                         </button>
                       </td>
                     </tr>
@@ -143,7 +143,7 @@ const Historique = () => {
             {totalPages > 1 && (
               <div className="flex items-center justify-between mt-6">
                 <p className="text-sm text-gray-500">
-                  Page {page} sur {totalPages} â€” {filtrees.length} rÃ©sultats
+                  Page {page} sur {totalPages} — {filtrees.length} résultats
                 </p>
                 <div className="flex gap-2">
                   <button
@@ -151,14 +151,14 @@ const Historique = () => {
                     disabled={page === 1}
                     className="px-3 py-1.5 text-sm border rounded-lg disabled:opacity-40 hover:bg-gray-50 transition"
                   >
-                    Â«
+                    «
                   </button>
                   <button
                     onClick={() => setPage(p => p - 1)}
                     disabled={page === 1}
                     className="px-3 py-1.5 text-sm border rounded-lg disabled:opacity-40 hover:bg-gray-50 transition"
                   >
-                    â€¹
+                    ‹
                   </button>
                   {Array.from({ length: totalPages }, (_, i) => i + 1)
                     .filter(p => p === 1 || p === totalPages || Math.abs(p - page) <= 2)
@@ -185,14 +185,14 @@ const Historique = () => {
                     disabled={page === totalPages}
                     className="px-3 py-1.5 text-sm border rounded-lg disabled:opacity-40 hover:bg-gray-50 transition"
                   >
-                    â€º
+                    ›
                   </button>
                   <button
                     onClick={() => setPage(totalPages)}
                     disabled={page === totalPages}
                     className="px-3 py-1.5 text-sm border rounded-lg disabled:opacity-40 hover:bg-gray-50 transition"
                   >
-                    Â»
+                    »
                   </button>
                 </div>
               </div>
